@@ -33,7 +33,7 @@ namespace TreinoWebAPI.Controllers
              new Produto() {
                 ProdutoId = 3,
                 Nome = "Detergente Ipe-Eucaliptum",
-                DataValidade = DateTime.Parse("10/08/2002"),
+                DataValidade = DateTime.Parse("10/08/2022"),
                 Valor = (decimal)5.99,
                 Ativo = false
 
@@ -42,19 +42,19 @@ namespace TreinoWebAPI.Controllers
              new Produto() {
                 ProdutoId = 4,
                 Nome = "Sabão de Côco Karatê 100g.",
-                DataValidade = DateTime.Parse("26/11/2001"),
+                DataValidade = DateTime.Parse("26/11/2021"),
                 Valor = (decimal)0.99,
                 Ativo = true
 
             },
         };
        
-       private readonly ProdutoContext _context;
+       /* private readonly ProdutoContext _context;
         
         public TreinoController(ProdutoContext context)
         {
             _context = context;
-        }
+        }*/
 
         [HttpGet]
         public IActionResult Get()
