@@ -49,12 +49,12 @@ namespace TreinoWebAPI.Controllers
             },
         };
        
-       /* private readonly ProdutoContext _context;
+       private readonly ProdutoContext _context;
         
         public TreinoController(ProdutoContext context)
         {
             _context = context;
-        }*/
+        }
 
         [HttpGet]
         public IActionResult Get()
