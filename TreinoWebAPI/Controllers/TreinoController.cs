@@ -19,14 +19,14 @@ namespace TreinoWebAPI.Controllers
             _context = context;
         }
 
-        // GET: api/CProduto
+        // GET: api/Treino
         [HttpGet] // POR ROTA
         public async Task<ActionResult<IEnumerable<Produto>>> GetProdutos()
         {
             return await _context.Produtos.ToListAsync();
         }
 
-        // GET: api/Produto/5
+        // GET: api/Treino/5
         [HttpGet("{id:int}")] // POR ROTA
         public async Task<ActionResult<Produto>> GetProdutosById(int id)
         {
@@ -53,8 +53,8 @@ namespace TreinoWebAPI.Controllers
 
         //============================================================================================================//
 
-        /* CRIADO ESTE OBJETO PARA TESTES.
-        public List<Produto> Produtos = new List<Produto> ()
+        // CRIADO ESTE OBJETO PARA TESTES.
+       /* public List<Produto> Produtos = new List<Produto> ()
         {
             new Produto(){
                 ProdutoId = 1,
@@ -91,11 +91,10 @@ namespace TreinoWebAPI.Controllers
                 Ativo = true
 
             },
-        };*/
+        };
 
          //============================================================================================================//
-
-        /*
+        
 
          [HttpGet]
         public IActionResult Get()
