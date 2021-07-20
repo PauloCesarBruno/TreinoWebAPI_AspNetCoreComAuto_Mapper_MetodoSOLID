@@ -7,7 +7,7 @@ namespace TreinoWebAPI.models
     {
         public Produto() { }       
        
-        public Produto(int produtoId, string nome, DateTime dataValidade, decimal valor, bool ativo)
+        public Produto(int produtoId, string nome, DateTime dataValidade, double valor, bool ativo)
         {
             this.ProdutoId = produtoId;
             this.Nome = nome;
@@ -25,13 +25,15 @@ namespace TreinoWebAPI.models
 
         [Required(ErrorMessage ="Campo Obrigatório !")]
         [Display(Name = "Data de Validade")]
+        //ABAIXO FORMATAR A DATA SEM A HORA
+        [DisplayFormat(DataFormatString = "{0: dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         public DateTime DataValidade { get; set; }
 
         [Required(ErrorMessage ="Campo Obrigatório !")]
         [Display(Name = "Valor do Produto")]
         [DataType(DataType.Currency)]
-        public decimal Valor { get; set; }
+        public double Valor { get; set; }
 
         [Required(ErrorMessage ="Campo Obrigatório !")]
         [Display(Name = "Produto Ativo")]
