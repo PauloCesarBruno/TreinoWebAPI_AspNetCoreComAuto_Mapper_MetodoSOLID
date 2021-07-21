@@ -23,7 +23,11 @@ namespace TreinoWebAPI.Controllers
         [HttpGet] // POR ROTA
         public async Task<ActionResult<IEnumerable<Produto>>> GetProdutos()
         {
-            return await _context.Produtos.ToListAsync();
+            if(_context.Produtos == null)
+
+            return BadRequest("Não foram localizados produtos cadastrados !");
+
+            return Ok(await _context.Produtos.ToListAsync());
         }
 
         // GET: api/Treino/5
@@ -34,10 +38,10 @@ namespace TreinoWebAPI.Controllers
 
             if (produto == null)
             {
-                return NotFound();
+                return BadRequest("O Produto " + id + " não foi localizado !");
             }
 
-            return produto;
+            return Ok(produto);
         }
 
 
