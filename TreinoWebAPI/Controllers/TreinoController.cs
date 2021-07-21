@@ -34,7 +34,7 @@ namespace TreinoWebAPI.Controllers
         [HttpGet("{id:int}")] // POR ROTA
         public async Task<ActionResult<Produto>> GetProdutosById(int id)
         {
-            var produto = await _context.Produtos.FindAsync(id);
+            var produto = await _context.Produtos.FirstOrDefaultAsync(p => p.ProdutoId == id);
 
             if (produto == null)
             {
