@@ -1,13 +1,11 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using TreinoWebAPI.models;
-using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
 namespace TreinoWebAPI.Controllers
-{ 
+{
     [ApiController]
     [Route("api/[controller]")]
     public class TreinoController : ControllerBase
@@ -44,7 +42,6 @@ namespace TreinoWebAPI.Controllers
             return Ok(produto);
         }
 
-
        //api/Treino/Nome
         [HttpGet("{nome}")] // Via QUERYSTRING.....
         public async Task<ActionResult<Produto>> GetProdutosByName(string nome)
@@ -53,6 +50,70 @@ namespace TreinoWebAPI.Controllers
             if (produto == null) return BadRequest("O produto " + nome + " não foi localizado !");
 
             return Ok(produto);
+        }
+
+         // POST: api/Treino
+        [HttpPost] // POR ROTA
+        public async Task<ActionResult<Produto>> Post(Produto produto)
+        {
+            _context.Add(produto);
+            await _context.SaveChangesAsync();
+
+            return Ok(produto);
+        }
+
+         // PUT: api/Treino/5
+        [HttpPut("{id}")] // POR ROTA
+        public async Task<ActionResult<Produto>> Put(int id, Produto produto)
+        {
+            var prod = await _context.Produtos.AsNoTracking().FirstOrDefaultAsync(p => p.ProdutoId == id);
+
+            if (prod == null)
+            {
+                return BadRequest("O Produto " + id + " não foi localizado !");
+            }
+
+            _context.Update(produto);
+            await _context.SaveChangesAsync();
+
+
+            return Ok(produto);
+        }
+
+         // PATCH: api/Treino/5
+        [HttpPatch("{id}")] // POR ROTA
+        public async Task<ActionResult<Produto>> Patch(int id, Produto produto)
+        {
+            var prod = await _context.Produtos.AsNoTracking().FirstOrDefaultAsync(p => p.ProdutoId == id);
+
+            if (prod == null)
+            {
+                return BadRequest("O Produto " + id + " não foi localizado !");
+            }
+
+            _context.Update(produto);
+            await _context.SaveChangesAsync();
+
+
+            return Ok(produto);
+        }
+
+         // DELETE: api/Treino/5
+        [HttpDelete("{id}")] // POR ROTA
+        public async Task<ActionResult<Produto>> Delete(int id)
+        {
+            var produto = await _context.Produtos.AsNoTracking().FirstOrDefaultAsync(p => p.ProdutoId == id);
+
+            if (produto == null)
+            {
+                return BadRequest("O Produto " + id + " não foi localizado !");
+            }
+
+            _context.Remove(produto);
+            await _context.SaveChangesAsync();
+
+
+            return Ok("Deletado com Sucesso !!!");
         }
 
         //============================================================================================================//
