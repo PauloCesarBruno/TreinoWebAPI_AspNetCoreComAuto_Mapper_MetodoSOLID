@@ -10,13 +10,10 @@ namespace TreinoWebAPI.Controllers
     [Route("api/[controller]")]
     public class TreinoController : ControllerBase
     {    
-        private readonly ProdutoContext _context;
         private readonly IRepository _repo;
         
-        public TreinoController(ProdutoContext context, 
-                                IRepository repo)
-        {    
-            _context = context;       
+        public TreinoController(IRepository repo)
+        {      
             _repo = repo;
         }
 
@@ -75,7 +72,7 @@ namespace TreinoWebAPI.Controllers
         [HttpPut("{id}")] // POR ROTA
         public async Task<IActionResult> Put(int id, Produto produto)
         {
-            var prod = await _context.Produtos.AsNoTracking().FirstOrDefaultAsync(p=> p.ProdutoId == id);
+            var prod = await _repo.GetProdutoByIdAsync(id);
 
             if (prod == null) BadRequest("Produto não Encontrado !!!");
 
@@ -94,7 +91,7 @@ namespace TreinoWebAPI.Controllers
         [HttpPatch("{id}")] // POR ROTA
         public async Task<ActionResult<Produto>> Patch(int id, Produto produto)
         {
-          var prod = await _context.Produtos.AsNoTracking().FirstOrDefaultAsync(p=> p.ProdutoId == id);
+            var prod = await _repo.GetProdutoByIdAsync(id);
 
             if (prod == null) BadRequest("Produto não Encontrado !!!");
 
@@ -111,7 +108,7 @@ namespace TreinoWebAPI.Controllers
          // DELETE: api/Treino/5
         [HttpDelete("{id}")] // POR ROTA
         public async Task<ActionResult<Produto>> Delete(int id)
-        {   var prod = await _context.Produtos.AsNoTracking().FirstOrDefaultAsync(p=> p.ProdutoId == id);
+        {   var prod = await _repo.GetProdutoByIdAsync(id);
 
             if (prod == null ) return BadRequest("Produto não Encontrado !!!");
 
