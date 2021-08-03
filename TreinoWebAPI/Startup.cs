@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using TreinoWebAPI.models;
+using TreinoWebAPI.models.Data;
 
 namespace TreinoWebAPI
 {
@@ -34,14 +35,16 @@ namespace TreinoWebAPI
                     .AddNewtonsoftJson(
                         opt => opt.SerializerSettings.ReferenceLoopHandling = 
                             Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-                            
+
+            services.AddScoped<IRepository, Repository>();     
             services.AddControllers();
             services.AddDbContext<ProdutoContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("ConexaoDB")));
             services.AddCors();
+            services.AddMvcCore();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TreinoWebAPI", Version = "v1" });
-            });
+            });           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
