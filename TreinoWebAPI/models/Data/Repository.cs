@@ -42,7 +42,7 @@ namespace TreinoWebAPI.models.Data
             query = query.AsNoTracking()
                          .OrderBy (p=> p.Nome);
             
-            return (await _context.Produtos.ToArrayAsync());
+            return (await query.ToArrayAsync());
         }
 
        public async Task<Produto> GetProdutosByNameAsync(string name) // o false deixa o parâmetro como opcional.
@@ -62,7 +62,6 @@ namespace TreinoWebAPI.models.Data
             IQueryable<Produto> query = _context.Produtos;
 
              query = query.AsNoTracking()
-                    .OrderBy(p => p.Nome) // Quero Ordenar por nome.
                     .Where(p => p.ProdutoId == ProdutoId); // Consultar por meio do Id.
 
                return await query.FirstOrDefaultAsync();
