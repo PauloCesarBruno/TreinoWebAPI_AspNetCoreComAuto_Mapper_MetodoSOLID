@@ -10,9 +10,9 @@ namespace TreinoWebAPI.models.Data
 
         Task<bool> SaveChangesAsync();
 
+//=====================================================================
 
         Task<Produto[]> GetAllProdutosAsync();
-
         Task<Produto> GetProdutoByIdAsync(int ProdutoId);
         Task<Produto> GetProdutosByNameAsync(string dataValidade);
     }
