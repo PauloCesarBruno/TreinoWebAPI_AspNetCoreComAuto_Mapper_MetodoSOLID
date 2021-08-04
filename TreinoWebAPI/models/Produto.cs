@@ -7,10 +7,12 @@ namespace TreinoWebAPI.models
     {
         public Produto() { }       
        
-        public Produto(int produtoId, string nome, DateTime dataValidade, double valor, bool ativo)
+        public Produto(int produtoId, string nome, string categoria, DateTime datafabricacao, DateTime dataValidade, double valor, bool ativo)
         {
             this.ProdutoId = produtoId;
             this.Nome = nome;
+            this.Categoria = categoria;
+            this.DataFabicacao = datafabricacao;
             this.DataValidade = dataValidade;
             this.Valor = valor;
             this.Ativo = ativo;
@@ -22,6 +24,18 @@ namespace TreinoWebAPI.models
         [StringLength(50, MinimumLength = 03, ErrorMessage = "Minimo 03 caracteres !"), MaxLength(50, ErrorMessage ="Máximo 50 caracteres !")]
         [Display(Name = "Nome")]
         public string Nome { get; set; }
+
+        [Required(ErrorMessage ="Campo Obrigatório !")]
+        [StringLength(50, MinimumLength = 03, ErrorMessage = "Minimo 03 caracteres !"), MaxLength(50, ErrorMessage ="Máximo 50 caracteres !")]
+        [Display(Name = "Categoria do Produto")]
+        public string Categoria { get; set; }
+
+        [Required(ErrorMessage ="Campo Obrigatório !")]
+        [Display(Name = "Data de Fabricação")]
+        //ABAIXO FORMATAR A DATA SEM A HORA
+        [DisplayFormat(DataFormatString = "{0: dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
+        public DateTime DataFabicacao { get; set; }
 
         [Required(ErrorMessage ="Campo Obrigatório !")]
         [Display(Name = "Data de Validade")]

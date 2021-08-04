@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using TreinoWebAPI.models;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using TreinoWebAPI.models.Data;
 
 namespace TreinoWebAPI.Controllers
@@ -108,7 +107,8 @@ namespace TreinoWebAPI.Controllers
          // DELETE: api/Treino/5
         [HttpDelete("{id}")] // POR ROTA
         public async Task<ActionResult<Produto>> Delete(int id)
-        {   var prod = await _repo.GetProdutoByIdAsync(id);
+        {  
+             var prod = await _repo.GetProdutoByIdAsync(id);
 
             if (prod == null ) return BadRequest("Produto não Encontrado !!!");
 

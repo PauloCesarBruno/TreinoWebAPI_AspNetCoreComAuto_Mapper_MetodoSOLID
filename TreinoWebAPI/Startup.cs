@@ -23,7 +23,8 @@ namespace TreinoWebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             
-            // Abaixo Ignora o Loop do Json.
+            // Abaixo Ignora o Looping infinito do Json Quando Há muitos Join´s.
+            //Baixar no Nughet -> Microsoft.ApNetCore.Mvc.NewtonsoftJson + a VERSSÃO.
                services.AddControllers()
                     .AddNewtonsoftJson(
                         opt => opt.SerializerSettings.ReferenceLoopHandling = 

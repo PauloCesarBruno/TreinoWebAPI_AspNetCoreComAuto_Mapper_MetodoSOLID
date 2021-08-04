@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TreinoWebAPI.Migrations
 {
-    public partial class initial : Migration
+    public partial class NewDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,6 +14,8 @@ namespace TreinoWebAPI.Migrations
                     ProdutoId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Categoria = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    DataFabicacao = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DataValidade = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Valor = table.Column<double>(type: "float", nullable: false),
                     Ativo = table.Column<bool>(type: "bit", nullable: false)

@@ -10,8 +10,8 @@ using TreinoWebAPI.models;
 namespace TreinoWebAPI.Migrations
 {
     [DbContext(typeof(ProdutoContext))]
-    [Migration("20210720150633_initial")]
-    partial class initial
+    [Migration("20210804153650_NewDB")]
+    partial class NewDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,6 +30,14 @@ namespace TreinoWebAPI.Migrations
 
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Categoria")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime>("DataFabicacao")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DataValidade")
                         .HasColumnType("datetime2");
