@@ -29,14 +29,6 @@ namespace TreinoWebAPI.Migrations
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Categoria")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<DateTime>("DataFabicacao")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime>("DataValidade")
                         .HasColumnType("datetime2");
 

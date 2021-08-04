@@ -29,6 +29,9 @@ namespace TreinoWebAPI
                     .AddNewtonsoftJson(
                         opt => opt.SerializerSettings.ReferenceLoopHandling = 
                             Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            
+            // ABAIXO CONFIGURAÇÃO PARA USO DO (AUTO-MAPPER).
+            services.AddAutoMapper(System.AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<IRepository, Repository>();     
             services.AddControllers();
