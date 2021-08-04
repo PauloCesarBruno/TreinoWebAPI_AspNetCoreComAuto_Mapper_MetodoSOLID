@@ -7,13 +7,12 @@ namespace TreinoWebAPI.Dto
     {
         public ProdutoDto() { }
 
-        public ProdutoDto(int produtoId, string nome, DateTime dataValidade, double valor, bool ativo)
+        public ProdutoDto(int produtoId, string nome, DateTime dataValidade, double valor)
         {
             this.ProdutoId = produtoId;
             this.Nome = nome;
             this.DataValidade = dataValidade;
             this.Valor = valor;
-            this.Ativo = ativo;
 
         }
         
@@ -35,10 +34,5 @@ namespace TreinoWebAPI.Dto
         [Display(Name = "Valor do Produto")]
         [DataType(DataType.Currency)]
         public double Valor { get; set; }
-
-        [Required(ErrorMessage = "Campo Obrigatório !")]
-        [Display(Name = "Produto Ativo")]
-        public bool Ativo { get; set; }
-
     }
 }
