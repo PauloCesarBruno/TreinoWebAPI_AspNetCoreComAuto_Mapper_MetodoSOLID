@@ -15,8 +15,8 @@ namespace TreinoWebAPI
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-        }
-
+        }       
+        
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -33,8 +33,9 @@ namespace TreinoWebAPI
             // ABAIXO CONFIGURAÇÃO PARA USO DO (AUTO-MAPPER).
             services.AddAutoMapper(System.AppDomain.CurrentDomain.GetAssemblies());
 
-            services.AddScoped<IRepository, Repository>();     
             services.AddControllers();
+            services.AddScoped<IRepositoryLeitura, RepositoryLeitura>(); 
+            services.AddScoped<IRepositoryManipulacao, RepositoryManipulacao>();  
             services.AddDbContext<ProdutoContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("ConexaoDB")));
             services.AddCors();
             services.AddMvcCore();

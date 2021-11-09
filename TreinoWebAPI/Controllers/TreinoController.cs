@@ -12,20 +12,25 @@ namespace TreinoWebAPI.Controllers
     [Route("api/[controller]")]
     public class TreinoController : ControllerBase
     {
-        public readonly IRepository _repo;
+        public readonly IRepositoryLeitura _repoLeitura;
+
+         public readonly IRepositoryManipulacao _repoManipulacao;
         private readonly IMapper _mapper;
 
-        public TreinoController(IRepository repo, IMapper mapper)
+        public TreinoController(IRepositoryLeitura repoLeitura,
+                                IRepositoryManipulacao RepoManipulacao,
+                                IMapper mapper)
         {
             _mapper = mapper;
-            _repo = repo;
+            _repoLeitura = repoLeitura;
+            _repoManipulacao = RepoManipulacao;
         }
 
         // GET: api/Treino
         [HttpGet] // POR ROTA
         public async Task<ActionResult<Produto>> GetAllProdutosAsync()
         {
-            var produtos = await _repo.GetAllProdutosAsync();            
+            var produtos = await _repoLeitura.GetAllProdutosAsync();            
 
             return Ok(_mapper.Map<IEnumerable<ProdutoDto>>(produtos));
         }
@@ -34,7 +39,7 @@ namespace TreinoWebAPI.Controllers
         [HttpGet("{id:int}")] // POR ROTA
         public async Task<ActionResult<Produto>> GetProdutoByIdAsync(int id)
         {
-            var produto = await _repo.GetProdutoByIdAsync(id);
+            var produto = await _repoLeitura.GetProdutoByIdAsync(id);
 
             if (produto == null)
             {
@@ -50,7 +55,7 @@ namespace TreinoWebAPI.Controllers
         [HttpGet("{nome}")] // Via QUERYSTRING.....
         public async Task<ActionResult<Produto>> GetAllProdutosByNameAsync(string nome)
         {
-            var produto = await _repo.GetProdutosByNameAsync(nome);
+            var produto = await _repoLeitura.GetProdutosByNameAsync(nome);
             if (produto == null) return BadRequest("O produto " + nome + " não foi localizado !");
 
             var produtoDto = _mapper.Map<ProdutoDto>(produto);
@@ -65,8 +70,8 @@ namespace TreinoWebAPI.Controllers
             //o (Var) abaixo é para Mapeamento do DTO:
             var produto = _mapper.Map<Produto>(model);
 
-            _repo.Add(produto);
-            if (await _repo.SaveChangesAsync())
+            _repoManipulacao.Add(produto);
+            if (await _repoManipulacao.SaveChangesAsync())
             {
                 // Ao Ivés do OK (cód. 200, o Created retorna um 201).
                 return Created($"/api/treino/{model.ProdutoId}", _mapper.Map<ProdutoDto>(produto));
@@ -79,16 +84,16 @@ namespace TreinoWebAPI.Controllers
         [HttpPut("{id}")] // POR ROTA          //Put(Produto produto) Era Assimm...Agora quero Mapear o Dto.
         public async Task<IActionResult> Put(int id, ProdutoDto model)
         {
-            var produto = await _repo.GetProdutoByIdAsync(id);
+            var produto = await _repoLeitura.GetProdutoByIdAsync(id);
 
             if (produto == null) BadRequest("Produto não Encontrado !!!");
 
             //Abaixo Mapeamento para o PUT.
             _mapper.Map(model, produto);
 
-            _repo.Update(produto);
+            _repoManipulacao.Update(produto);
 
-            if (await _repo.SaveChangesAsync())
+            if (await _repoManipulacao.SaveChangesAsync())
             {
                 // Ao Ivés do OK (cód. 200, o Created retorna um 201).
                 return Created($"/api/treino/{model.ProdutoId}", _mapper.Map<ProdutoDto>(produto));
@@ -101,16 +106,16 @@ namespace TreinoWebAPI.Controllers
         [HttpPatch("{id}")] // POR ROTA              //Patch(Produto produto) Era Assimm...Agora quero Mapear o Dto.
         public async Task<ActionResult<Produto>> Patch(int id, ProdutoDto model)
         {
-            var produto = await _repo.GetProdutoByIdAsync(id);
+            var produto = await _repoLeitura.GetProdutoByIdAsync(id);
 
             if (produto == null) BadRequest("Produto não Encontrado !!!");
 
             //Abaixo Mapeamento para o PUT.
             _mapper.Map(model, produto);
 
-            _repo.Update(produto);
+            _repoManipulacao.Update(produto);
 
-            if (await _repo.SaveChangesAsync())
+            if (await _repoManipulacao.SaveChangesAsync())
             {
                // Ao Ivés do OK (cód. 200, o Created retorna um 201).
                 return Created($"/api/treino/{model.ProdutoId}", _mapper.Map<ProdutoDto>(produto));
@@ -122,14 +127,14 @@ namespace TreinoWebAPI.Controllers
         [HttpDelete("{id}")] // POR ROTA
         public async Task<ActionResult<Produto>> Delete(int id)
         {
-            var produto = await _repo.GetProdutoByIdAsync(id);
+            var produto = await _repoLeitura.GetProdutoByIdAsync(id);
 
             if (produto == null) return BadRequest("Produto não Encontrado !!!");
 
 
-            _repo.Remove(produto);
+            _repoManipulacao.Delete(produto);
 
-            if (await _repo.SaveChangesAsync())
+            if (await _repoManipulacao.SaveChangesAsync())
             {
                 return Ok("Produto Excluido com Sucesso !!!");
             }

@@ -10,8 +10,8 @@ using TreinoWebAPI.models;
 namespace TreinoWebAPI.Migrations
 {
     [DbContext(typeof(ProdutoContext))]
-    [Migration("20210804215136_NewDB2")]
-    partial class NewDB2
+    [Migration("20211109051919_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

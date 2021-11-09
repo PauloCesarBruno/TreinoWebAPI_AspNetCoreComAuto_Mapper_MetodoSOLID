@@ -4,36 +4,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace TreinoWebAPI.models.Data
 {
-    public class Repository : IRepository
+    public class RepositoryLeitura : IRepositoryLeitura
     {
         private readonly ProdutoContext _context;
         
-        public Repository(ProdutoContext context)
+        public RepositoryLeitura(ProdutoContext context)
         {
             _context = context;
-        }       
-
-        public void Add<T>(T entity) where T : class
-        {
-            _context.Add(entity);
-        }
-
-        public void Update<T>(T entity) where T : class
-        {
-            _context.Update(entity);
-        }
-
-        public void Remove<T>(T entity) where T : class
-        {
-           _context.Remove(entity);
-        }       
-
-        public async Task<bool> SaveChangesAsync()
-        {
-            return (await _context.SaveChangesAsync() >0);
-        }
-
-        //=====================================================================
+        }    
 
         public async Task<Produto[]> GetAllProdutosAsync()
         {
