@@ -65,7 +65,7 @@ namespace TreinoWebAPI.Controllers
         }
 
         // POST: api/Treino
-        [HttpPost] // POR ROTA                  //Post(Produto produto) Era Assimm...Agora quero Mapear o Dto.
+        [HttpPost] //POR ROTA                  //Post(Produto produto) Era Assimm...Agora quero Mapear o Dto.
         public async Task<ActionResult<Produto>> Post(ProdutoDto model)
         {
             //o (Var) abaixo é para Mapeamento do DTO:
