@@ -223,6 +223,9 @@ UpgradeLog*.htm
 *.mdf
 *.ldf
 
+# Arquivos TXT (Eu Criei)
+*.txt
+
 # Business Intelligence projects
 *.rdl.data
 *.bim.layout
@@ -242,9 +245,6 @@ FakesAssemblies/
 
 # Visual Studio 6 workspace options file
 *.opt
-
-# Arquivos txt
-*.txt
 
 # Visual Studio LightSwitch build output
 **/*.HTMLClient/GeneratedArtifacts
