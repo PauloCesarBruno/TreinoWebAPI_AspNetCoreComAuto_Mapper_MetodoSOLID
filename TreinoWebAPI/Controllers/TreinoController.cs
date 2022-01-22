@@ -16,7 +16,7 @@ namespace TreinoWebAPI.Controllers
         public readonly IRepositoryLeitura _repoLeitura;
 
          public readonly IRepositoryManipulacao _repoManipulacao;
-        private readonly IMapper _mapper;
+         private readonly IMapper _mapper;
 
         public TreinoController(IRepositoryLeitura repoLeitura,
                                 IRepositoryManipulacao RepoManipulacao,
